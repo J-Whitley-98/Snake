@@ -1,7 +1,8 @@
-# Snake - Godot 4.1 - GDScript2
-# Version 1.0: 11/10/23
-  # Barebones functional snake game in 3D
-  # Main Menu, Options Menu, and Classic mode
+# Snake: 
+    # Godot 4.1 - GDScript2
+    # Version 1.0: 11/10/23
+    # Barebones functional snake game in 3D
+      # Main Menu, Options Menu, and Classic snake game mode
   # Current Bugs:
     # Food can still spawn inside of snake tail and inside itself.
       # This doesn't really break game behaviour, but maybe that's just because I'm not that good at snake.
