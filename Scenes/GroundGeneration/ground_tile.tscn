@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxqil6kllwbh3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gdj04"]
+size = Vector3(1.75, 0.5, 1.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_25ufv"]
+size = Vector3(2, 0.45, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26um8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="GroundTile" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gdj04")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_25ufv")
+surface_material_override/0 = SubResource("StandardMaterial3D_26um8")

@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://dcxn6xh7y4ro6"]
+
+[ext_resource type="Script" path="res://Scripts/Snake/head.gd" id="1_fartj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e3x22"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cbpmh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_djgc5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxbo7"]
+albedo_color = Color(0, 0.3868, 2.88785e-07, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ncrq5"]
+left_to_right = 0.6
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_s6br6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mfq3"]
+albedo_color = Color(0.415686, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ghusc"]
+top_radius = 0.05
+bottom_radius = 0.0
+height = 0.6
+
+[node name="Head" type="CharacterBody3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_fartj")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_e3x22")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cbpmh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, -0.25)
+layers = 2
+mesh = SubResource("BoxMesh_djgc5")
+surface_material_override/0 = SubResource("StandardMaterial3D_qxbo7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, 0.75)
+mesh = SubResource("PrismMesh_ncrq5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_qxbo7")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
+transform = Transform3D(-1.31134e-08, -0.3, 1.05879e-21, -1.31134e-08, 5.73206e-16, 0.3, -0.3, 1.31134e-08, -1.31134e-08, -0.301674, -0.069355, 0.195187)
+mesh = SubResource("SphereMesh_s6br6")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6mfq3")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
+transform = Transform3D(-1.31134e-08, -0.3, 1.05879e-21, -1.31134e-08, 5.73206e-16, 0.3, -0.3, 1.31134e-08, -1.31134e-08, -0.302, -0.069, -0.195)
+mesh = SubResource("SphereMesh_s6br6")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6mfq3")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
+transform = Transform3D(-4.37114e-08, -0.985562, -0.169315, -4.37114e-08, -0.169315, 0.985562, -1, 5.04813e-08, -3.56793e-08, 0.198039, 0.253768, 0.2694)
+mesh = SubResource("CylinderMesh_ghusc")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
+transform = Transform3D(-4.37114e-08, -0.985562, -0.169315, -4.37114e-08, -0.169315, 0.985562, -1, 5.04813e-08, -3.56793e-08, 0.198, 0.254, -0.269)
+mesh = SubResource("CylinderMesh_ghusc")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, 0.75)
+mesh = SubResource("PrismMesh_ncrq5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_qxbo7")
+
+[node name="Timer" type="Timer" parent="." groups=["Head", "Snake"]]
+wait_time = 0.25
+autostart = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

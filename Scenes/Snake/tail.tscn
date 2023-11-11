@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpkv4jfqlmosk"]
+
+[ext_resource type="Script" path="res://Scripts/Snake/tail.gd" id="1_b17pj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_djgc5"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ungsn"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rubuf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cbpmh"]
+
+[node name="Tail" type="CharacterBody3D"]
+script = ExtResource("1_b17pj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_djgc5")
+surface_material_override/0 = SubResource("StandardMaterial3D_ungsn")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_rubuf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cbpmh")

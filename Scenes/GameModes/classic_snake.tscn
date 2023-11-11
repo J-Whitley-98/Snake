@@ -1,0 +1,194 @@
+[gd_scene load_steps=8 format=3 uid="uid://51ex5y1q2tjy"]
+
+[ext_resource type="Script" path="res://Scripts/GameModes/classic_snake.gd" id="1_hiy5x"]
+[ext_resource type="PackedScene" uid="uid://dndsrei0gevud" path="res://Scenes/GroundGeneration/grid_generator.tscn" id="2_j8146"]
+[ext_resource type="PackedScene" uid="uid://c7d0nogdbm33s" path="res://Scenes/FoodGeneration/food_spawner.tscn" id="3_ss370"]
+[ext_resource type="Script" path="res://Scenes/GameModes/notes.gd" id="4_hci73"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oh70n"]
+sky_top_color = Color(0.705882, 0.235294, 0.545098, 1)
+sky_horizon_color = Color(0.698039, 0.678431, 0, 1)
+sky_curve = 0.0568395
+
+[sub_resource type="Sky" id="Sky_vbray"]
+sky_material = SubResource("ProceduralSkyMaterial_oh70n")
+
+[sub_resource type="Environment" id="Environment_448co"]
+background_mode = 2
+sky = SubResource("Sky_vbray")
+ambient_light_source = 3
+ambient_light_color = Color(0.592157, 0.490196, 0.196078, 1)
+
+[node name="ClassicSnake" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_hiy5x")
+
+[node name="GridGenerator" parent="." instance=ExtResource("2_j8146")]
+
+[node name="FoodSpawner" parent="." instance=ExtResource("3_ss370")]
+
+[node name="Snake" type="Node3D" parent="." groups=["Snake"]]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_448co")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.770402, 0.637558, 0, -0.637558, 0.770402, 0, 13.4583, 7.98261)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="World/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="World/CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="World/CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
+
+[node name="PreGameMenu" type="MarginContainer" parent="World/CanvasLayer"]
+process_mode = 3
+offset_left = 570.0
+offset_top = 540.0
+offset_right = 1350.0
+offset_bottom = 820.0
+pivot_offset = Vector2(390, 140)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="World/CanvasLayer/PreGameMenu"]
+layout_mode = 2
+
+[node name="Begin" type="Button" parent="World/CanvasLayer/PreGameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Begin"
+
+[node name="HSplitContainer" type="HBoxContainer" parent="World/CanvasLayer/PreGameMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="SnakeSpeedLabel" type="Label" parent="World/CanvasLayer/PreGameMenu/VBoxContainer/HSplitContainer" groups=["GameMode"]]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Snake Speed: "
+
+[node name="SnakeSpeed" type="OptionButton" parent="World/CanvasLayer/PreGameMenu/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+item_count = 5
+selected = 2
+popup/item_0/text = "Slowest"
+popup/item_0/id = 0
+popup/item_1/text = "Slow"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Fast"
+popup/item_3/id = 3
+popup/item_4/text = "Fastest"
+popup/item_4/id = 4
+
+[node name="MapSizeLabel" type="Label" parent="World/CanvasLayer/PreGameMenu/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+text = "Map Size: "
+
+[node name="MapSize" type="OptionButton" parent="World/CanvasLayer/PreGameMenu/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+item_count = 3
+selected = 1
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Large"
+popup/item_2/id = 2
+
+[node name="MainMenu" type="Button" parent="World/CanvasLayer/PreGameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="PauseMenu" type="MarginContainer" parent="World/CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = -1
+anchor_left = 0.409635
+anchor_top = 0.439352
+anchor_right = 0.590365
+anchor_bottom = 0.560648
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="World/CanvasLayer/PauseMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="World/CanvasLayer/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="World/CanvasLayer/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="MainMenu" type="Button" parent="World/CanvasLayer/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitGame" type="Button" parent="World/CanvasLayer/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="DeathMenu" type="MarginContainer" parent="World/CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -76.0
+offset_right = 127.5
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="World/CanvasLayer/DeathMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="World/CanvasLayer/DeathMenu/VBoxContainer"]
+layout_mode = 2
+text = "Game Over!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+horizontal_alignment = 1
+
+[node name="FinalSnakeLength" type="Label" parent="World/CanvasLayer/DeathMenu/VBoxContainer"]
+layout_mode = 2
+text = "Final Snake Length:"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="World/CanvasLayer/DeathMenu/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="MainMenu" type="Button" parent="World/CanvasLayer/DeathMenu/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Notes" type="Node" parent="."]
+script = ExtResource("4_hci73")
+
+[connection signal="pressed" from="World/CanvasLayer/PreGameMenu/VBoxContainer/Begin" to="." method="_on_begin_pressed"]
+[connection signal="item_selected" from="World/CanvasLayer/PreGameMenu/VBoxContainer/HSplitContainer/SnakeSpeed" to="." method="_on_snake_speed_item_selected"]
+[connection signal="item_selected" from="World/CanvasLayer/PreGameMenu/VBoxContainer/HSplitContainer/MapSize" to="." method="_on_map_size_item_selected"]
+[connection signal="pressed" from="World/CanvasLayer/PreGameMenu/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="World/CanvasLayer/PauseMenu/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="World/CanvasLayer/PauseMenu/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="World/CanvasLayer/PauseMenu/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="World/CanvasLayer/DeathMenu/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="World/CanvasLayer/DeathMenu/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7d0nogdbm33s"]
+
+[ext_resource type="Script" path="res://Scripts/FoodGeneration/food_spawner.gd" id="1_sdxt8"]
+
+[node name="FoodSpawner" type="Node3D"]
+script = ExtResource("1_sdxt8")
+
+[node name="SpawnTimer" type="Timer" parent="." groups=["Food Spawner"]]
+process_callback = 0
+wait_time = 0.1
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

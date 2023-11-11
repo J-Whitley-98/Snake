@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://7xsm87w770xw"]
+
+[ext_resource type="Script" path="res://Scripts/UI/options_menu.gd" id="1_54ntm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bsr8n"]
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+outline_size = 3
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 538.0
+offset_top = 242.0
+offset_right = 538.0
+offset_bottom = 242.0
+script = ExtResource("1_54ntm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MarginContainer2"]
+show_behind_parent = true
+layout_mode = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -11.5
+offset_right = 200.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -235.5
+offset_right = 200.0
+offset_bottom = 235.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 235.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Options
+"
+label_settings = SubResource("LabelSettings_bsr8n")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MarginContainer/VBoxContainer/GridContainer/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.439216, 0.466667, 1)
+
+[node name="Button2" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/GridContainer/Button" to="." method="_on_button_pressed"]

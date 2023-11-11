@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dndsrei0gevud"]
+
+[ext_resource type="Script" path="res://Scripts/GroundGeneration/grid_generator.gd" id="1_ofu0o"]
+
+[node name="GridGenerator" type="Node3D"]
+script = ExtResource("1_ofu0o")
+
+[node name="GroundTiles" type="Node3D" parent="."]
+
+[node name="SpawnPoints" type="Node3D" parent="."]
