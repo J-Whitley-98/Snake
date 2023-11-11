@@ -18,5 +18,4 @@
     # Fleshing out of menu components.
       # "Tutorial" boxes to explain controls and goal of the game.
       # Hide mouse on begin game. Show on game end or pause.
-# First Update:
-  # Wednesday - 11/15/23
+# First Update: Wednesday - 11/15/23
