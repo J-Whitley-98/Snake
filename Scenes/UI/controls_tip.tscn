@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1lyld7xifu01"]
+
+[ext_resource type="Script" path="res://Scripts/UI/controls_tip.gd" id="1_ykssv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7c7jh"]
+font_size = 24
+font_color = Color(0, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_ifd6x"]
+resource_name = "pulse"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lt7q1"]
+_data = {
+"pulse": SubResource("Animation_ifd6x")
+}
+
+[node name="ControlsTip" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ykssv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0520833
+anchor_top = 0.455093
+anchor_right = 0.263542
+anchor_bottom = 0.544907
+grow_vertical = 2
+pivot_offset = Vector2(203, 48.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_7c7jh")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Use \"WASD\" or \"Arrow Keys\" to choose direction."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "The snake will continue to move until you win or die!"
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2"]
+show_behind_parent = true
+layout_mode = 2
+color = Color(0, 0, 0.156863, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lt7q1")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

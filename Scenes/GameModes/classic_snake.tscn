@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://51ex5y1q2tjy"]
+[gd_scene load_steps=10 format=3 uid="uid://51ex5y1q2tjy"]
 
 [ext_resource type="Script" path="res://Scripts/GameModes/classic_snake.gd" id="1_hiy5x"]
 [ext_resource type="PackedScene" uid="uid://dndsrei0gevud" path="res://Scenes/GroundGeneration/grid_generator.tscn" id="2_j8146"]
@@ -18,6 +18,19 @@ background_mode = 2
 sky = SubResource("Sky_vbray")
 ambient_light_source = 3
 ambient_light_color = Color(0.592157, 0.490196, 0.196078, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_hijyp"]
+font_names = PackedStringArray("Limelight")
+font_stretch = 200
+
+[sub_resource type="LabelSettings" id="LabelSettings_h3ae6"]
+line_spacing = 0.0
+font = SubResource("SystemFont_hijyp")
+font_size = 75
+font_color = Color(0.0941176, 0.384314, 0.145098, 1)
+outline_size = 5
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="ClassicSnake" type="Node3D"]
 process_mode = 1
@@ -53,14 +66,43 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15,
 
 [node name="PreGameMenu" type="MarginContainer" parent="World/CanvasLayer"]
 process_mode = 3
-offset_left = 570.0
-offset_top = 540.0
-offset_right = 1350.0
-offset_bottom = 820.0
-pivot_offset = Vector2(390, 140)
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1870.0
+offset_bottom = 1030.0
+pivot_offset = Vector2(910, 490)
+
+[node name="GameModeTitle" type="MarginContainer" parent="World/CanvasLayer/PreGameMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="World/CanvasLayer/PreGameMenu/GameModeTitle"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="World/CanvasLayer/PreGameMenu/GameModeTitle/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Classic Snake
+"
+label_settings = SubResource("LabelSettings_h3ae6")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="World/CanvasLayer/PreGameMenu/GameModeTitle/MarginContainer/Label"]
+show_behind_parent = true
+custom_minimum_size = Vector2(678, 93)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.737255, 0.243137, 0.486275, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="World/CanvasLayer/PreGameMenu"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Begin" type="Button" parent="World/CanvasLayer/PreGameMenu/VBoxContainer"]
 layout_mode = 2
@@ -112,7 +154,6 @@ text = "Main Menu"
 
 [node name="PauseMenu" type="MarginContainer" parent="World/CanvasLayer"]
 process_mode = 3
-visible = false
 anchors_preset = -1
 anchor_left = 0.409635
 anchor_top = 0.439352
@@ -145,7 +186,6 @@ text = "Quit Game"
 
 [node name="DeathMenu" type="MarginContainer" parent="World/CanvasLayer"]
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

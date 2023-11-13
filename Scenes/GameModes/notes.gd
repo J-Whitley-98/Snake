@@ -10,4 +10,6 @@ extends Node
 
 #Next steps:
 #- Fix, at the least, first known bug
-#- Upload project to Github
+
+
+#<emitting_node>.connect("signal_name", <target_node>, "target_method_name")
