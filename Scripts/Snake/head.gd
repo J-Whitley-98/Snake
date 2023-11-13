@@ -1,31 +1,29 @@
 class_name head extends CharacterBody3D
 
+#--------------------Variables & Signals--------------------
 @onready var tail_segment = preload("res://Scenes/Snake/tail.tscn")
-
-signal snake_death(snake_length)
 
 @onready var move_timer = $Timer
 
 var game_over : bool = false
+var game_won : bool = false
+
 var new_tail_segment
 
-#--------------------------------------------VARIABLES----------------------------------------------
+var last_direction = Vector2(0,1)
+var head_pos: Vector2 = Vector2(global_position.x,global_position.z)
+var forward
+var bounds = 0
+
+var tail_segments = []
+var positions = [global_position, Vector3(0,1,2)]
 var snake_length 
 
-#Initialize initial direction as up and head starting position x and y.
-var last_direction = Vector2(0,1)
-@onready var head_pos = Vector2(global_position.x,global_position.z)
-var forward
+signal snake_death(snake_length)
 
-#Initialize boundary and tail segment array.
-var bounds = 0
-var tail_segments = []
-
-var positions = []
 #---------------------------------------------------------------------------------------------------
 
 func _ready():
-	#food_eaten_signal.connect() - connect this to the food spawner in the classic snake 
 	instantiate_tail()
 	move_timer.start()
 
@@ -42,11 +40,6 @@ func _process(_delta):
 		move_timer.stop()
 		await delete_tail()
 		queue_free()
-		
-#	Makes the last tail segment like 1/2 size
-#	This also reminds me of a bug or visual problem - new tail segments are always full size on screen
-#	on instantiation. Fix by startings small or invisible?
-#	last_array_entry(tail_segments)._shrink(1-(.5))
 
 func _on_area_3d_body_entered(body):
 	if ((body is tail) and (body != last_array_entry(tail_segments))):
@@ -58,18 +51,16 @@ func _on_area_3d_body_entered(body):
 	if body is food:
 		body._explode()
 		food_eaten()
-#---------------------------------------------------------------------------------------------------
 
-#--------------------------------------------SETTERS & HELPERS--------------------------------------
-#Setter for floor bounds to allow internal "out of bounds" checks.
+#--------------------------------------------Setters & Helpers--------------------------------------
+#Allows internal "out of bounds" checks.
 func _set_bounds(grid_size):
 	bounds = grid_size/2
 
 func last_array_entry(array):
 	return array[array.size()-1]
-#---------------------------------------------------------------------------------------------------
 
-#----------------------------------------MOVEMENT---------------------------------------------------
+#--------------------Movement--------------------
 func _input(event):
 	if(event.is_action_released("Up") and last_direction != Vector2(0,-1) and forward != "down"):
 		last_direction = Vector2(0,1)
@@ -101,25 +92,26 @@ func _on_timer_timeout():
 		head_pos.x -= 1
 		forward = "left"
 		look_at((global_position + Vector3(2,0,0)), Vector3.UP)
+		
 	update_tail()
-#---------------------------------------------------------------------------------------------------
 
-#---------------------------------TAIL--------------------------------------------------------------
+#--------------------Tail Logic--------------------
 func instantiate_tail():
 	generate_new_tail_segment(Vector3(0,1,2), get_tree().current_scene)
 	tail_segments[0].next_position = position
 	
-#Helper function for instantiating a tail block, I want this to be moved to the head?
 func generate_new_tail_segment(position_init, parent_scene):
 	new_tail_segment = tail_segment.instantiate()
 	tail_segments.append(new_tail_segment)
 	new_tail_segment.position = position_init
 	new_tail_segment.next_position = position_init
 	parent_scene.add_child(new_tail_segment)	
+	new_tail_segment._shrink(0.01)
 
 func food_eaten():
 	var tail_end = last_array_entry(tail_segments)
 	generate_new_tail_segment(tail_end.position, get_node("../"))
+	$Crunch.play()
 
 #Updates entire tail's position and size.
 func update_tail():
@@ -143,9 +135,13 @@ func delete_tail():
 #	for i in range(0, tail_segments.size()):
 #		await get_tree().create_timer(.1).timeout
 #		tail_segments[tail_segments.size()-i-1].queue_free()
+	tail_segments.reverse()
 	for segment in tail_segments:
+#		await get_tree().create_timer(.1).timeout
 		segment.queue_free()
 	snake_death.emit(snake_length)
+
+
 
 
 

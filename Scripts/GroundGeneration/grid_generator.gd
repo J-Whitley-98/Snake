@@ -1,16 +1,15 @@
-extends Node3D
+class_name grid_generator extends Node3D
+
+#--------------------Variables--------------------
+@onready var ground_tile = preload("res://Scenes/GroundGeneration/ground_tile.tscn")
+var new_tile
+
+var grid_size = 7
 
 @onready var spawn_points = []
 var new_spawn_point
-var new_tile
 
-@onready var ground_tile = preload("res://Scenes/GroundGeneration/ground_tile.tscn")
-
-var grid_size = 7:
-	set(new_grid_size):
-		grid_size = new_grid_size
-
-
+#--------------------Logic--------------------
 func _instantiate_ground():
 
 	@warning_ignore("integer_division")
@@ -18,13 +17,15 @@ func _instantiate_ground():
 	var start_point = Vector3(-2*grid_calc, 0, -2*grid_calc-2)
 	var current_position = start_point
 	
+	#Initialize 2D array of grid size x grid size
 	var floor_grid = []
 	floor_grid.resize(grid_size)
 	for i in grid_size:
 		var temp = []
 		temp.resize(grid_size)
 		floor_grid[i] = temp
-		
+	
+	#Iterate through 3D space and instantiates grid tiles at current position, filling 2D array, and creating 3D markers for spawn point array.
 	for i in grid_size:
 		current_position.z += 2
 		for j in floor_grid[i]:

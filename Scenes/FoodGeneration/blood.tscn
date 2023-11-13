@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5y2d7yvmyxgn"]
 
-[ext_resource type="Script" path="res://Scenes/FoodGeneration/blood.gd" id="1_e8cqw"]
+[ext_resource type="Script" path="res://Scripts/FoodGeneration/blood.gd" id="1_e8cqw"]
 
 [sub_resource type="Curve" id="Curve_axy1q"]
 min_value = -200.0

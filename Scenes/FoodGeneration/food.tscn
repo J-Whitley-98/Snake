@@ -1,6 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbfkoi2g006kc"]
+[gd_scene load_steps=14 format=3 uid="uid://bbfkoi2g006kc"]
 
 [ext_resource type="Script" path="res://Scripts/FoodGeneration/food.gd" id="1_ofxaq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7tw5x"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7wldd"]
 size = Vector3(0.5, 0.5, 0.75)
@@ -32,10 +34,15 @@ albedo_color = Color(0.85098, 0.298039, 0.466667, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_hdkh2"]
 size = Vector3(0.1, 0.1, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_typ6l"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqgsq"]
 
-[node name="Food" type="CharacterBody3D" groups=["Food"]]
+[node name="Food" type="CharacterBody3D"]
 script = ExtResource("1_ofxaq")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_7tw5x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_7wldd")
@@ -110,4 +117,4 @@ mesh = SubResource("BoxMesh_hdkh2")
 surface_material_override/0 = SubResource("StandardMaterial3D_er1ri")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_typ6l")
+shape = SubResource("BoxShape3D_dqgsq")

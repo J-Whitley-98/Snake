@@ -1,48 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3bp3hy2alg7"]
+[gd_scene load_steps=5 format=3 uid="uid://d3bp3hy2alg7"]
 
 [ext_resource type="Script" path="res://Scripts/UI/main_menu.gd" id="1_aaplj"]
 
-[sub_resource type="SystemFont" id="SystemFont_8x04k"]
-subpixel_positioning = 0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb3nj"]
+bg_color = Color(0.0666667, 0.211765, 0, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.486275, 0.964706, 0, 1)
+border_blend = true
+corner_detail = 10
+
+[sub_resource type="SystemFont" id="SystemFont_07n0p"]
+font_names = PackedStringArray("Limelight")
+font_stretch = 200
 
 [sub_resource type="LabelSettings" id="LabelSettings_au3tr"]
 line_spacing = 0.0
-font = SubResource("SystemFont_8x04k")
-font_size = 55
+font = SubResource("SystemFont_07n0p")
+font_size = 75
 font_color = Color(0.0941176, 0.384314, 0.145098, 1)
-outline_size = 4
+outline_size = 5
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="MarginContainer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -235.5
-offset_right = 200.0
-offset_bottom = 235.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(200, 235.5)
 size_flags_horizontal = 4
-size_flags_vertical = 4
 script = ExtResource("1_aaplj")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gb3nj")
+
+[node name="GridContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "~~~~~~~~~~~
+text = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Super Snake!
-~~~~~~~~~~~"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 label_settings = SubResource("LabelSettings_au3tr")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="ColorRect" type="ColorRect" parent="GridContainer/Label"]
 show_behind_parent = true

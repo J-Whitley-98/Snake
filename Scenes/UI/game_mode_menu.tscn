@@ -1,0 +1,164 @@
+[gd_scene load_steps=9 format=3 uid="uid://djdhi5f3u4cpy"]
+
+[ext_resource type="Texture2D" uid="uid://c50ltsyhosvgw" path="res://Icons/classic_snake.png" id="1_fiws4"]
+[ext_resource type="Script" path="res://Scenes/UI/game_mode_menu.gd" id="1_om0nj"]
+[ext_resource type="Texture2D" uid="uid://df8tq4kuedsjr" path="res://Icons/snake_2.png" id="2_8o7ut"]
+[ext_resource type="Texture2D" uid="uid://d28d0lm8fvqq1" path="res://Icons/back_snake.png" id="2_bw3n0"]
+[ext_resource type="Texture2D" uid="uid://hbcusuxesrxa" path="res://Icons/snake_3.png" id="3_wag6i"]
+[ext_resource type="Texture2D" uid="uid://b27k7xjs5x4e4" path="res://Icons/snake_4.png" id="4_x2ske"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxooh"]
+bg_color = Color(0.101961, 0.219608, 0.243137, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_detail = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_cfni8"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+outline_size = 5
+
+[node name="GameModeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_om0nj")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nxooh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = -50.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(910, 490)
+
+[node name="Back" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("2_bw3n0")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -522.0
+offset_top = -506.0
+offset_right = 522.0
+offset_bottom = 506.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="GridContainer/MarginContainer2"]
+layout_mode = 2
+color = Color(0, 0.270588, 0, 1)
+
+[node name="ClassicSnake" type="Button" parent="GridContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("1_fiws4")
+
+[node name="Label" type="Label" parent="GridContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Classic Snake"
+label_settings = SubResource("LabelSettings_cfni8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="GridContainer/MarginContainer3"]
+layout_mode = 2
+color = Color(0.427451, 0, 0.427451, 1)
+
+[node name="Snake2" type="Button" parent="GridContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("2_8o7ut")
+
+[node name="Label2" type="Label" parent="GridContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TBD"
+label_settings = SubResource("LabelSettings_cfni8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="GridContainer/MarginContainer4"]
+layout_mode = 2
+color = Color(0, 0, 0.521569, 1)
+
+[node name="Snake3" type="Button" parent="GridContainer/MarginContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_wag6i")
+
+[node name="Label3" type="Label" parent="GridContainer/MarginContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TBD"
+label_settings = SubResource("LabelSettings_cfni8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer5" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="GridContainer/MarginContainer5"]
+layout_mode = 2
+color = Color(0.431373, 0, 0, 1)
+
+[node name="Snake4" type="Button" parent="GridContainer/MarginContainer5"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("4_x2ske")
+
+[node name="Label4" type="Label" parent="GridContainer/MarginContainer5"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TBD"
+label_settings = SubResource("LabelSettings_cfni8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="GridContainer/MarginContainer2/ClassicSnake" to="." method="_on_classic_snake_pressed"]
