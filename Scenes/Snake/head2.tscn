@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcxn6xh7y4ro6"]
+[gd_scene load_steps=11 format=3 uid="uid://br3eyq77b0tps"]
 
-[ext_resource type="Script" path="res://Scripts/Snake/head.gd" id="1_fartj"]
-[ext_resource type="AudioStream" uid="uid://bqtj13i4f6ykg" path="res://Sounds/crunch.wav" id="2_hi4uj"]
+[ext_resource type="Script" path="res://Scripts/Snake/head.gd" id="1_n3cww"]
+[ext_resource type="AudioStream" uid="uid://bqtj13i4f6ykg" path="res://Sounds/crunch.wav" id="2_orhft"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e3x22"]
 size = Vector3(1.5, 1.5, 1.5)
@@ -32,7 +32,7 @@ height = 0.6
 
 [node name="Head" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-script = ExtResource("1_fartj")
+script = ExtResource("1_n3cww")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -87,7 +87,7 @@ wait_time = 0.25
 autostart = true
 
 [node name="Crunch" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_hi4uj")
+stream = ExtResource("2_orhft")
 volume_db = -20.0
 pitch_scale = 0.5
 
